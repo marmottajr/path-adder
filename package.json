@@ -1,0 +1,21 @@
+{
+  "name": "path-adder",
+  "version": "1.0.0",
+  "description": "A Node.js script to add a comment with the file's relative path to all .js and .ts files in a directory and its subdirectories.",
+  "main": "index.js",
+  "bin": {
+    "path-adder": "./dist/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && chmod +x dist/index.js"
+  },
+  "keywords": ["nodejs", "typescript", "file-path", "comment", "script"],
+  "author": "Márcio Motta <marcio@camposmotta.com.br>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^20.12.12",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
