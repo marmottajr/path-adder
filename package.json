@@ -1,21 +1,63 @@
 {
-  "name": "path-adder",
+  "name": "path-adder-extension",
+  "displayName": "Path Adder",
+  "description": "Add file path comments to JavaScript and TypeScript files",
   "version": "1.0.0",
-  "description": "A Node.js script to add a comment with the file's relative path to all .js and .ts files in a directory and its subdirectories.",
-  "main": "index.js",
-  "bin": {
-    "path-adder": "./dist/index.js"
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pathAdder.addPathsToWorkspace",
+        "title": "Add Path Comments to All JS/TS Files",
+        "category": "Path Adder"
+      },
+      {
+        "command": "pathAdder.addPathToCurrentFile",
+        "title": "Add Path Comment to Current File",
+        "category": "Path Adder"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "pathAdder.addPathsToWorkspace",
+          "when": "explorerResourceIsFolder",
+          "group": "pathAdder"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "pathAdder.addPathToCurrentFile",
+          "when": "resourceExtname == .js || resourceExtname == .ts",
+          "group": "pathAdder"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "pathAdder.addPathsToWorkspace"
+        },
+        {
+          "command": "pathAdder.addPathToCurrentFile",
+          "when": "resourceExtname == .js || resourceExtname == .ts"
+        }
+      ]
+    }
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && chmod +x dist/index.js"
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
   },
-  "keywords": ["nodejs", "typescript", "file-path", "comment", "script"],
-  "author": "Márcio Motta <marcio@camposmotta.com.br>",
-  "license": "MIT",
-  "dependencies": {
-    "@types/node": "^20.12.12",
-    "ts-node": "^10.9.2",
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "20.x",
     "typescript": "^5.4.5"
   }
 }
